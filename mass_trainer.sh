@@ -4,13 +4,13 @@ source ~/.virtualenvs/cv/bin/activate
 python --version
 
 models="COCO-InstanceSegmentation/mask_rcnn_R_101_DC5_3x.yaml
-COCO-InstanceSegmentation/retinanet_R_101_FPN_3x.yaml
+COCO-Detection/retinanet_R_101_FPN_3x.yaml
 COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml
 COCO-InstanceSegmentation/mask_rcnn_R_101_C4_3x.yaml
 "
 
-lrs=(0.00025, 0.02)
-iters=(200, 300, 800, 1000)
+lrs=(0.00025 0.02)
+iters=(200 300 800 1000)
 
 for i in $iters
 do
