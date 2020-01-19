@@ -57,7 +57,7 @@ cfg.SOLVER.MAX_ITER = 300
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # only has 2 class (person & ball)
 
-cfg.OUTPUT_DIR = args.output    # set output dir
+cfg.OUTPUT_DIR = output_dir    # set output dir
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 trainer = DefaultTrainer(cfg)
