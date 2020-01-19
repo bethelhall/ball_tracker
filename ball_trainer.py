@@ -22,6 +22,12 @@ def get_parser():
     )
     parser.add_argument("--resume", action="store_true",
                         help="Whether trainer resume_or_load should be true")
+    parser.add_argument(
+        "--opts",
+        help="Modify config options using the command-line 'KEY VALUE' pairs",
+        default=[],
+        nargs=argparse.REMAINDER,
+    )
     return parser
 
 
@@ -52,12 +58,15 @@ cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
 cfg.SOLVER.IMS_PER_BATCH = 2
 cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
 # 300 iterations seems good enough for this toy dataset; you may need to train longer for a practical dataset
-cfg.SOLVER.MAX_ITER = 300
+cfg.SOLVER.MAX_ITER = 1000
 # faster, and good enough for this toy dataset (default: 512)
-cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
+# cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # only has 2 class (person & ball)
+cfg.MODEL.RETINANET.NUM_CLASSES = 2
 
 cfg.OUTPUT_DIR = output_dir    # set output dir
+
+cfg.merge_from_list(args.opts)  # override using cmd opts option
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 trainer = DefaultTrainer(cfg)
