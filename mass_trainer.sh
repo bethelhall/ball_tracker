@@ -18,7 +18,7 @@ do
     do
         for m in $models
         do
-            echo "training ${m} with lr: ${lr} & iter: ${iter}.........."
+            echo "training ${m} with lr: ${l} & iter: ${i}.........."
             echo "..........................."
             python ball_trainer.py --config-name $m --output ../data/output --opts SOLVER.MAX_ITER $i SOLVER.BASE_LR $l
         done
