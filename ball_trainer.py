@@ -15,6 +15,13 @@ def get_parser():
                         default="COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml",
                         help="model .yml file name in configs folder of detectron2",
                         )
+    parser.add_argument(
+        "--output",
+        default="./output",
+        help="A directory to save training outputs. ",
+    )
+    parser.add_argument("--resume", action="store_true",
+                        help="Whether trainer resume_or_load should be true")
     return parser
 
 
@@ -30,7 +37,10 @@ register_coco_instances(dataset_name, {}, json_file,
                         img_root, category_names=category_names)
 
 # setup model cfg
-model_yml = args.config_name
+model_yml = args.config_name    # get model .yaml name
+output_dir = os.path.join(
+    args.output, model_yml.rstrip('.yaml'))   # setup output dir
+
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file(
     model_yml))
@@ -47,7 +57,9 @@ cfg.SOLVER.MAX_ITER = 300
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # only has 2 class (person & ball)
 
+cfg.OUTPUT_DIR = args.output    # set output dir
+
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 trainer = DefaultTrainer(cfg)
-trainer.resume_or_load(resume=True)
+trainer.resume_or_load(resume=args.resume)
 trainer.train()
