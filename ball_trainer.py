@@ -34,7 +34,7 @@ model_yml = args.config_name
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file(
     model_yml))
-cfg.DATASETS.TRAIN = ("balloon_train",)
+cfg.DATASETS.TRAIN = ("ball_train",)
 cfg.DATASETS.TEST = ()
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
