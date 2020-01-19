@@ -64,9 +64,10 @@ cfg.SOLVER.MAX_ITER = 1000
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # only has 2 class (person & ball)
 cfg.MODEL.RETINANET.NUM_CLASSES = 2
 
-cfg.OUTPUT_DIR = output_dir    # set output dir
-
 cfg.merge_from_list(args.opts)  # override using cmd opts option
+
+# set output dir
+cfg.OUTPUT_DIR = f'{output_dir}_lr{cfg.SOLVER.BASE_LR}_iter{cfg.SOLVER.MAX_ITER}'
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 trainer = DefaultTrainer(cfg)
