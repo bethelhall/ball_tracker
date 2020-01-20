@@ -12,7 +12,7 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description="Detectron2 filtered categories trainer from builtin models")
     parser.add_argument("--config-name",
-                        default="COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml",
+                        default="COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml",
                         help="model .yml file name in configs folder of detectron2",
                         )
     parser.add_argument(
@@ -44,8 +44,6 @@ register_coco_instances(dataset_name, {}, json_file,
 
 # setup model cfg
 model_yml = args.config_name    # get model .yaml name
-output_dir = os.path.join(
-    args.output, model_yml.rstrip('.yaml'))   # setup output dir
 
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file(
@@ -67,6 +65,8 @@ cfg.MODEL.RETINANET.NUM_CLASSES = 2
 cfg.merge_from_list(args.opts)  # override using cmd opts option
 
 # set output dir
+output_dir = os.path.join(
+    args.output, model_yml.rstrip('.yaml'))
 cfg.OUTPUT_DIR = f'{output_dir}_lr{cfg.SOLVER.BASE_LR}_iter{cfg.SOLVER.MAX_ITER}'
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
