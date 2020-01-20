@@ -27,7 +27,7 @@ def setup_cfg(args):
 
     # change based on finetuning changes
     cfg.DATASETS.TRAIN = ("ball_train",)
-    cfg.DATASETS.TEST = ()
+    cfg.DATASETS.TEST = ("ball_test",)
     cfg.DATALOADER.NUM_WORKERS = 2
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
         model_yml)  # Let training initialize from model zoo
