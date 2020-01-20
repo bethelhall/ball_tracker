@@ -102,6 +102,11 @@ if __name__ == "__main__":
         args.output = f'{output_dir}_lr{cfg.SOLVER.BASE_LR}_iter{cfg.SOLVER.MAX_ITER}'
         os.makedirs(args.output, exist_ok=True)  # create if not exist
 
+     # set metadata
+    MetadataCatalog.get("ball_test").set(
+        evaluator_type="coco", thing_classes=["person", "sports ball"]
+    )
+
     demo = VisualizationDemo(cfg, parallel=args.parallel)
 
     if args.input:
