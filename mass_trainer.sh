@@ -12,9 +12,9 @@ COCO-InstanceSegmentation/mask_rcnn_R_101_C4_3x.yaml
 lrs=(0.00025 0.02)
 iters=(200 300 800 1000)
 
-for i in $iters
+for i in "${iters[@]}"
 do
-    for l in $lrs
+    for l in "${lrs[@]}"
     do
         for m in $models
         do
