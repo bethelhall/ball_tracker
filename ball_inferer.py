@@ -68,6 +68,8 @@ def get_parser():
         help="A file or directory to save output visualizations. "
         "If not given, will show output in an OpenCV window.",
     )
+    parser.add_argument("--parallel", action="store_true",
+                        help="Make demo visualizer parallel")
 
     parser.add_argument(
         "--confidence-threshold",
@@ -100,7 +102,7 @@ if __name__ == "__main__":
         args.output = f'{output_dir}_lr{cfg.SOLVER.BASE_LR}_iter{cfg.SOLVER.MAX_ITER}'
         os.makedirs(args.output, exist_ok=True)  # create if not exist
 
-    demo = VisualizationDemo(cfg)
+    demo = VisualizationDemo(cfg, parallel=args.parallel)
 
     if args.input:
         if len(args.input) == 1:
