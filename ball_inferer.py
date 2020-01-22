@@ -94,6 +94,20 @@ if __name__ == "__main__":
     logger = setup_logger()
     logger.info("Arguments: " + str(args))
 
+    # set metadata same as training one
+    dataset_name = 'ball_test'  # change name of train_name
+    metadata = {}
+    json_file = f'../data/annotations/annotations/instances_train2017.json'
+    img_root = f'../data/train2017/'
+    category_names = ['person', 'sports ball']
+    register_coco_instances(dataset_name, {}, json_file,
+                            img_root, category_names=category_names)
+
+    # set metadata !! does not set all metadata as training
+    # MetadataCatalog.get("ball_test").set(
+    #     evaluator_type="coco", thing_classes=["person", "sports ball"]
+    # )
+
     cfg = setup_cfg(args)
 
     # setup output dir
@@ -103,20 +117,6 @@ if __name__ == "__main__":
             args.output, model_yml.rstrip('.yaml'))
         args.output = f'{output_dir}_lr{cfg.SOLVER.BASE_LR}_iter{cfg.SOLVER.MAX_ITER}'
         os.makedirs(args.output, exist_ok=True)  # create if not exist
-
-    # set metadata same as training one
-    dataset_name = 'ball_test'  # change name of train_name
-    metadata = {}
-    json_file = f'../data/annotations/annotations/instances_train2017.json'
-    img_root = f'../data/train2017/'
-    category_names = ['person', 'sports ball']
-    register_coco_instances(dataset_name, {}, json_file,
-                            img_root, category_names=category_names)
-                            
-    # set metadata !! does not set all metadata as training
-    # MetadataCatalog.get("ball_test").set(
-    #     evaluator_type="coco", thing_classes=["person", "sports ball"]
-    # )
 
     demo = VisualizationDemo(cfg, parallel=args.parallel)
 
