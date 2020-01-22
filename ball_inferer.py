@@ -45,9 +45,9 @@ def setup_cfg(args):
     cfg.merge_from_list(args.opts)  # override using cmd opts option
 
     # Set score_threshold for builtin models
-    # cfg.MODEL.RETINANET.SCORE_THRESH_TEST = args.confidence_threshold
-    # cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.confidence_threshold
-    # cfg.MODEL.PANOPTIC_FPN.COMBINE.INSTANCES_CONFIDENCE_THRESH = args.confidence_threshold
+    cfg.MODEL.RETINANET.SCORE_THRESH_TEST = args.confidence_threshold
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.confidence_threshold
+    cfg.MODEL.PANOPTIC_FPN.COMBINE.INSTANCES_CONFIDENCE_THRESH = args.confidence_threshold
     cfg.freeze()
     return cfg
 
