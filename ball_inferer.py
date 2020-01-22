@@ -112,6 +112,7 @@ if __name__ == "__main__":
     category_names = ['person', 'sports ball']
     register_coco_instances(dataset_name, {}, json_file,
                             img_root, category_names=category_names)
+                            
     # set metadata !! does not set all metadata as training
     # MetadataCatalog.get("ball_test").set(
     #     evaluator_type="coco", thing_classes=["person", "sports ball"]
