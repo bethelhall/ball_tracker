@@ -14,7 +14,7 @@ from detectron2.utils.logger import setup_logger
 
 from predictor import VisualizationDemo
 
-from ball_loader import register_coco_instances
+from ball_loader import register_coco_instances, load_coco_json
 
 # constants
 WINDOW_NAME = "COCO detections"
@@ -100,6 +100,11 @@ if __name__ == "__main__":
     json_file = f'../data/annotations/annotations/instances_train2017.json'
     img_root = f'../data/train2017/'
     category_names = ['person', 'sports ball']
+
+    # set metadata using the same dataset loading methods used for training i.e laziness
+    # call load_coco_json yourself since register_coco_instances will not call for ya
+    load_coco_json(json_file, img_root, dataset_name, category_names=category_names)
+    # call also register_coco_instances to set some metadata
     register_coco_instances(dataset_name, {}, json_file,
                             img_root, category_names=category_names)
 
