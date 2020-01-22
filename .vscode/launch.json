@@ -1,0 +1,37 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: ball_inferer.py File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--config-name",
+                "COCO-InstanceSegmentation/mask_rcnn_R_101_DC5_3x.yaml",
+                "--video-input",
+                "../data/selected_videos/2178.mp4",
+                "--output",
+                "../data/results/tests/",
+                "--opts",
+                "MODEL.WEIGHTS",
+                "../data/output/COCO-InstanceSegmentation/mask_rcnn_R_101_DC5_3x_lr0.00025_iter1000/model_final.pth",
+                "SOLVER.MAX_ITER",
+                "1000",
+                "SOLVER.BASE_LR",
+                "0.00025"
+            ]
+        }
+    ]
+}
