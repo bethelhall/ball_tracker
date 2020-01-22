@@ -14,6 +14,8 @@ from detectron2.utils.logger import setup_logger
 
 from predictor import VisualizationDemo
 
+from ball_loader import register_coco_instances
+
 # constants
 WINDOW_NAME = "COCO detections"
 
