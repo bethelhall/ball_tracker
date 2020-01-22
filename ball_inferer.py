@@ -96,16 +96,18 @@ if __name__ == "__main__":
 
     # set metadata same as training one
     dataset_name = 'ball_test'  # change name of train_name
-    metadata = {}
+    # don't use random colors
+    metadata = {"thing_colors": [(0, 0, 255), (0, 255, 0)]}
     json_file = f'../data/annotations/annotations/instances_train2017.json'
     img_root = f'../data/train2017/'
     category_names = ['person', 'sports ball']
 
     # set metadata using the same dataset loading methods used for training i.e laziness
     # call load_coco_json yourself since register_coco_instances will not call for ya
-    load_coco_json(json_file, img_root, dataset_name, category_names=category_names)
+    load_coco_json(json_file, img_root, dataset_name,
+                   category_names=category_names)
     # call also register_coco_instances to set some metadata
-    register_coco_instances(dataset_name, {}, json_file,
+    register_coco_instances(dataset_name, metadata, json_file,
                             img_root, category_names=category_names)
 
     # set metadata !! does not set all metadata as training
