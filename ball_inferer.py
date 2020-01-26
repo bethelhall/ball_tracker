@@ -39,8 +39,8 @@ def setup_cfg(args):
     cfg.SOLVER.MAX_ITER = 1000
     # faster, and good enough for this toy dataset (default: 512)
     # cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
-    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # only has 2 class (person & ball)
-    cfg.MODEL.RETINANET.NUM_CLASSES = 2
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1  # only has 2 class (person & ball)
+    cfg.MODEL.RETINANET.NUM_CLASSES = 1
 
     cfg.merge_from_list(args.opts)  # override using cmd opts option
 
@@ -97,10 +97,10 @@ if __name__ == "__main__":
     # set metadata same as training one
     dataset_name = 'ball_test'  # change name of train_name
     # don't use random colors
-    metadata = {"thing_colors": [(0, 0, 255), (0, 255, 0)]}
+    metadata = {"thing_colors": [(0, 0, 255)]}
     json_file = f'../data/annotations/annotations/instances_train2017.json'
     img_root = f'../data/train2017/'
-    category_names = ['person', 'sports ball']
+    category_names = ['sports ball']
 
     # set metadata using the same dataset loading methods used for training i.e laziness
     # call load_coco_json yourself since register_coco_instances will not call for ya

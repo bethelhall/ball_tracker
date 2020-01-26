@@ -224,7 +224,7 @@ if __name__ == "__main__":
     img_dir = f'../data/train2017/'
 
     dataset_dicts = load_coco_json(json_file, img_dir, dataset_name,
-                                   category_names=['person', 'sports ball'])
+                                   category_names=['sports ball'])
     print(f'dataset_dicts type: ', type(dataset_dicts))
 
     import cv2
